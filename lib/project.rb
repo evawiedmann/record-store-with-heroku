@@ -5,7 +5,7 @@ class Album
   @@total_rows = 0
 
   def initialize(name, id, year, artist)
-    @name = name.capitalize
+    @name = name
     @id = id || @@total_rows += 1
     @year = year
     @artist = artist
@@ -55,7 +55,7 @@ class Album
   def self.sorter
     @@albums.values.sort_by {|album| album.name}
   end
-  
+
   def songs
     Song.find_by_album(self.id)
   end
