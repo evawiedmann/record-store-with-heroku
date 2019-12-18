@@ -22,4 +22,36 @@ class Song
   def save
     @@songs[self.id] = Song.new(self.name, self.album_id, self.id)
   end
+
+  def self.find(id)
+    @@songs[id]
+  end
+
+  def update(name, album_id)
+    self.name = name
+    self.album_id = album_id
+    @@songs[self.id] = Song.new(self.name, self.album_id, self.id)
+  end
+
+  def delete
+    @@songs.delete(self.id)
+  end
+
+  def self.clear
+    @@songs = {}
+  end
+
+  def self.find_by_album(alb_id)
+    songs = []
+    @@songs.values.each do |song|
+      if song.album_id == alb_id
+        songs.push(song)
+      end
+    end
+    songs
+  end
+
+  def album
+    Album.find(self.album_id)
+  end
 end
